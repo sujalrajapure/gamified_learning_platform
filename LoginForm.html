@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solve - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#120a2e] text-white font-sans flex items-center justify-center min-h-screen">
+
+    <!-- Login Container -->
+    <div class="bg-[#1e1341] bg-opacity-60 p-8 rounded-xl shadow-lg w-full max-w-md text-center 
+                backdrop-blur-md border border-purple-500/30">
+        
+        <!-- Logo & Title -->
+        <h2 class="text-3xl font-bold mb-4">Welcome Back</h2>
+        <p class="text-gray-300 mb-6">Log in to continue</p>
+
+        <!-- Form -->
+        <form action="#" class="space-y-4">
+
+            <!-- Email Input -->
+            <div class="relative">
+                <input type="email" placeholder="Email" class="w-full bg-[#1e1341] text-white p-3 rounded-lg border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <!-- Password Input -->
+            <div class="relative">
+                <input type="password" placeholder="Password" class="w-full bg-[#1e1341] text-white p-3 rounded-lg border border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <!-- Remember Me & Forgot Password -->
+            <div class="flex items-center justify-between text-sm text-gray-300">
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" class="accent-purple-500">
+                    <span>Remember Me</span>
+                </label>
+                <a href="#" class="text-purple-400 hover:underline">Forgot Password?</a>
+            </div>
+
+            <!-- Login Button -->
+            <button class="w-full bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-lg transition">
+                Log In
+            </button>
+
+            <!-- OR Divider -->
+            <div class="flex items-center my-4">
+                <hr class="w-full border-gray-500">
+                <span class="px-2 text-gray-400">OR</span>
+                <hr class="w-full border-gray-500">
+            </div>
+
+            <!-- Social Logins -->
+            <button class="w-full bg-gray-700 hover:bg-gray-800 p-3 rounded-lg transition flex items-center justify-center space-x-2">
+                <img src="google-icon.svg" alt="Google" class="w-5 h-5">
+                <span>Login with Google</span>
+            </button>
+
+        </form>
+
+        <!-- Sign Up Link -->
+        <p class="text-gray-300 mt-6">Don't have an account? 
+            <a href="#" class="text-purple-400 hover:underline">Sign Up</a>
+        </p>
+
+    </div>
+
+</body>
+</html>
