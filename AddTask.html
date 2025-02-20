@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task - SOVEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-gray-900 to-black text-white">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center p-6">
+        <h1 class="text-2xl font-bold">SOVEL</h1>
+        <ul class="flex gap-6">
+            <li><a href="#" class="hover:text-purple-400">Home</a></li>
+            <li><a href="#" class="hover:text-purple-400">Features</a></li>
+            <li><a href="#" class="hover:text-purple-400">About</a></li>
+        </ul>
+        <button class="bg-purple-600 px-4 py-2 rounded-lg">Sign In</button>
+    </nav>
+
+    <!-- Add Task Section -->
+    <section class="py-10 px-10 bg-gray-900">
+        <h2 class="text-3xl font-bold text-center mb-6">Add New Task</h2>
+        <form id="taskForm" class="max-w-4xl mx-auto bg-gray-800 p-6 rounded-xl">
+            <div class="mb-4">
+                <label for="title" class="block text-sm font-medium text-gray-400">Task Title</label>
+                <input type="text" id="title" name="title" placeholder="Enter task title"
+                    class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-purple-600">
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-sm font-medium text-gray-400">Description</label>
+                <textarea id="description" name="description" rows="3" placeholder="Enter task description"
+                    class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-purple-600"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="deadline" class="block text-sm font-medium text-gray-400">Deadline</label>
+                <input type="date" id="deadline" name="deadline"
+                    class="w-full mt-1 p-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:border-purple-600">
+            </div>
+            <button type="submit"
+                class="w-full bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-300">Add Task</button>
+        </form>
+    </section>
+
+    <!-- Current Tasks Section -->
+    <section class="py-10 px-10 bg-gray-900">
+        <h2 class="text-3xl font-bold text-center mb-6">Current Tasks</h2>
+        <div id="tasksContainer" class="space-y-4 max-w-4xl mx-auto">
+            <!-- Sample Task 1 -->
+            <div class="bg-gray-800 p-4 rounded-xl flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-semibold">Complete Project Proposal</h3>
+                    <p class="text-gray-400">Description: Draft the proposal document for the upcoming project.</p>
+                    <p class="text-gray-400">Deadline: 2023-12-15</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="updateTask(this)"
+                        class="px-3 py-1 bg-yellow-500 text-black rounded-md hover:bg-yellow-600 transition duration-300">Update</button>
+                    <button onclick="deleteTask(this)"
+                        class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300">Delete</button>
+                </div>
+            </div>
+            <!-- Sample Task 2 -->
+            <div class="bg-gray-800 p-4 rounded-xl flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-semibold">Prepare Presentation Slides</h3>
+                    <p class="text-gray-400">Description: Create slides for the client meeting on Friday.</p>
+                    <p class="text-gray-400">Deadline: 2023-12-20</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="updateTask(this)"
+                        class="px-3 py-1 bg-yellow-500 text-black rounded-md hover:bg-yellow-600 transition duration-300">Update</button>
+                    <button onclick="deleteTask(this)"
+                        class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300">Delete</button>
+                </div>
+            </div>
+            <!-- Sample Task 3 -->
+            <div class="bg-gray-800 p-4 rounded-xl flex justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-semibold">Review Team Reports</h3>
+                    <p class="text-gray-400">Description: Analyze weekly progress reports from all teams.</p>
+                    <p class="text-gray-400">Deadline: 2023-12-25</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="updateTask(this)"
+                        class="px-3 py-1 bg-yellow-500 text-black rounded-md hover:bg-yellow-600 transition duration-300">Update</button>
+                    <button onclick="deleteTask(this)"
+                        class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300">Delete</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center py-6 text-gray-500">
+        <p>&copy; 2025 SOVEL. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for Task Management
+        const tasksContainer = document.getElementById('tasksContainer');
+        const taskForm = document.getElementById('taskForm');
+
+        let tasks = [
+            {
+                title: "Complete Project Proposal",
+                description: "Draft the proposal document for the upcoming project.",
+                deadline: "2023-12-15"
+            },
+            {
+                title: "Prepare Presentation Slides",
+                description: "Create slides for the client meeting on Friday.",
+                deadline: "2023-12-20"
+            },
+            {
+                title: "Review Team Reports",
+                description: "Analyze weekly progress reports from all teams.",
+                deadline: "2023-12-25"
+            }
+        ]; // Array to store tasks
+
+        // Function to render tasks
+        function renderTasks() {
+            tasksContainer.innerHTML = ''; // Clear the container
+            tasks.forEach((task, index) => {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'bg-gray-800 p-4 rounded-xl flex justify-between items-center';
+                taskDiv.innerHTML = `
+                    <div>
+                        <h3 class="text-lg font-semibold">${task.title}</h3>
+                        <p class="text-gray-400">Description: ${task.description}</p>
+                        <p class="text-gray-400">Deadline: ${task.deadline}</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="updateTask(${index})"
+                            class="px-3 py-1 bg-yellow-500 text-black rounded-md hover:bg-yellow-600 transition duration-300">Update</button>
+                        <button onclick="deleteTask(${index})"
+                            class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-300">Delete</button>
+                    </div>
+                `;
+                tasksContainer.appendChild(taskDiv);
+            });
+        }
+
+        // Render initial tasks
+        renderTasks();
+
+        // Add Task
+        taskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const deadline = document.getElementById('deadline').value;
+
+            if (!title || !description || !deadline) {
+                alert('Please fill all fields!');
+                return;
+            }
+
+            tasks.push({ title, description, deadline });
+            renderTasks();
+
+            // Reset form
+            taskForm.reset();
+        });
+
+        // Delete Task
+        function deleteTask(index) {
+            tasks.splice(index, 1); // Remove task from array
+            renderTasks(); // Re-render tasks
+        }
+
+        // Update Task
+        function updateTask(index) {
+            const newTitle = prompt('Enter new title:', tasks[index].title);
+            const newDescription = prompt('Enter new description:', tasks[index].description);
+            const newDeadline = prompt('Enter new deadline (YYYY-MM-DD):', tasks[index].deadline);
+
+            if (newTitle && newDescription && newDeadline) {
+                tasks[index] = { title: newTitle, description: newDescription, deadline: newDeadline };
+                renderTasks();
+            } else {
+                alert('Please provide valid inputs.');
+            }
+        }
+    </script>
+</body>
+</html>
